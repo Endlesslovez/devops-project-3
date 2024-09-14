@@ -1,7 +1,7 @@
 version: 0.2
 env:
   variables:
-    TAG-DOCKER: $CODEBUILD_BUILD_NUMBER
+    TAG_DOCKER: $CODEBUILD_BUILD_NUMBER
 phases:
   pre_build:
      commands:
@@ -12,11 +12,11 @@ phases:
   build:
     commands:
       - echo ====================== start build ======================
-      - docker build -t $TAG-DOCKER --file ./analytics/Dockerfile .
+      - echo tag $TAG_DOCKER
+      - docker build -t $TAG_DOCKER --file ./analytics/Dockerfile .
       - echo ====================== end build ======================
   post_build:
     commands:
       - echo ====================== start post build ======================
-      - docker push $TAG-DOCKER
+      - docker push $TAG_DOCKER
       - echo ====================== end post build ======================
-
