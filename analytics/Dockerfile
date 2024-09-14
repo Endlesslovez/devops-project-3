@@ -2,7 +2,7 @@ FROM python:3.12.6-slim-bullseye
 
 WORKDIR /src
 
-COPY ./requirements.txt requirements.txt
+COPY analytics/requirements.txt requirements.txt
 
 RUN pip install -r requirements.txt
 
