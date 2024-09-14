@@ -4,22 +4,19 @@ env:
     TAG-DOCKER: $CODEBUILD_BUILD_NUMBER
 phases:
   pre_build:
+     commands:
+      - author Minhnx
+      - echo ===============  start pre-build  ======================
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 376129848715.dkr.ecr.us-east-1.amazonaws.com
+      - echo ====================== end pre-build ======================
+  build:
     commands:
-      - echo test
-  # pre-build:
-  #    commands:
-  #     - author Minhnx
-  #     - echo ===============  start pre-build  ======================
-  #     - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 376129848715.dkr.ecr.us-east-1.amazonaws.com
-  #     - echo ====================== end pre-build ======================
-  # build:
-  #   commands:
-  #     - echo ====================== start build ======================
-  #     - docker build -t $TAG-DOCKER --file ./analytics/Dockerfile .
-  #     - echo ====================== end build ======================
-  # post-build:
-  #   commands:
-  #     - echo ====================== start post build ======================
-  #     - docker push $TAG-DOCKER
-  #     - echo ====================== end post build ======================
+      - echo ====================== start build ======================
+      - docker build -t $TAG-DOCKER --file ./analytics/Dockerfile .
+      - echo ====================== end build ======================
+  post_build:
+    commands:
+      - echo ====================== start post build ======================
+      - docker push $TAG-DOCKER
+      - echo ====================== end post build ======================
 
