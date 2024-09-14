@@ -15,5 +15,5 @@ phases:
   post_build:
     commands:
       - echo ====================== start post build ======================
-      - docker push $CODEBUILD_BUILD_NUMBER
+      - docker push 376129848715.dkr.ecr.us-east-1.amazonaws.com/project-3:$CODEBUILD_BUILD_NUMBER
       - echo ====================== end post build ======================
