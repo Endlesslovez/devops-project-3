@@ -3,7 +3,7 @@ env:
   variables:
     TAG-DOCKER: $CODEBUILD_BUILD_NUMBER
 phases:
-  pre-build:
+  pre_build:
     commands:
       - echo test
   # pre-build:
