@@ -1,0 +1,19 @@
+version: 0.2
+phases:
+  pre-build:
+     commands:
+      - author Minhnx
+      - echo ===============  start pre-build  ======================
+      - aws ecr get-login-password
+      - echo ====================== end pre-build ======================
+  build:
+    commands:
+      - echo ====================== start build ======================
+      - docker build -t $CODEBUILD_BUILD_NUMBER .
+      - echo ====================== end build ======================
+  post-build:
+    commands:
+      - echo ====================== start post build ======================
+      - docker push
+      - echo ====================== end post build ======================
+
