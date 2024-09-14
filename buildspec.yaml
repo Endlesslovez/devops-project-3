@@ -5,7 +5,7 @@ env:
 phases:
   pre_build:
      commands:
-      - author Minhnx
+      - echo author Minhnx
       - echo ===============  start pre-build  ======================
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 376129848715.dkr.ecr.us-east-1.amazonaws.com
       - echo ====================== end pre-build ======================
