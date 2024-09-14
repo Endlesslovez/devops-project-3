@@ -4,7 +4,7 @@ phases:
      commands:
       - author Minhnx
       - echo ===============  start pre-build  ======================
-      - aws ecr get-login-password
+      - aws ecr get-login-password | docker login --username AWS --password-stdin 376129848715.dkr.ecr.region.amazonaws.com
       - echo ====================== end pre-build ======================
   build:
     commands:
