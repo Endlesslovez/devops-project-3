@@ -10,10 +10,11 @@ phases:
     commands:
       - echo ====================== start build ======================
       - echo tag $CODEBUILD_BUILD_NUMBER
-      - docker build -t $CODEBUILD_BUILD_NUMBER --file ./analytics/Dockerfile .
+      - docker build --file ./analytics/Dockerfile .
+      - docker tag $CODEBUILD_BUILD_NUMBER 376129848715.dkr.ecr.us-east-1.amazonaws.com/project-3:$CODEBUILD_BUILD_NUMBER
       - echo ====================== end build ======================
   post_build:
     commands:
       - echo ====================== start post build ======================
-      - docker push project-3:$CODEBUILD_BUILD_NUMBER
+      - docker push 376129848715.dkr.ecr.us-east-1.amazonaws.com/project-3:$CODEBUILD_BUILD_NUMBER
       - echo ====================== end post build ======================
