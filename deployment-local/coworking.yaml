@@ -1,12 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: coworking
+  name: project-3
 spec:
-  # A local environment doesn't generally have a LoadBalancer, so we use NodePort instead.
-  type: NodePort
+  type: LoadBalancer
   selector:
-    service: coworking
+    service: project-3
   ports:
   - name: "5153"
     protocol: TCP
@@ -16,23 +15,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: coworking
+  name: project-3
   labels:
-    name: coworking
+    name: project-3
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: coworking
+      service: project-3
   template:
     metadata:
       labels:
-        service: coworking
+        service: project-3
     spec:
       containers:
-      - name: coworking
-        # Locally hosted docker image
-        image: <DOCKER_IMAGE_NAME>:<IMAGE_TAG>
+      - name: project-31
+        image: 376129848715.dkr.ecr.us-east-1.amazonaws.com/project-3:24
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -48,11 +46,31 @@ spec:
           timeoutSeconds: 5
         envFrom:
         - configMapRef:
-            name: <NAME OF THE ConfigMap>
+            name: configmap
         env:
-        - name: DB_PASSWORD
+        - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: <NAME OF THE Secret>
-              key: <THE KEY FROM Secret WHICH has THE ENCODED PASSWORD>
+              name: Secret_Project3
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: ConfigMap_Project3
+              key: POSTGRES_DB
+        - name: POSTGRES_USER
+          valueFrom:
+            configMapKeyRef:
+              name: ConfigMap_Project3
+              key: POSTGRES_USER
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: ConfigMap_Project3
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: ConfigMap_Project3
+              key: DB_PORT
       restartPolicy: Always
