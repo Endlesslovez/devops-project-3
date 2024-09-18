@@ -3,12 +3,12 @@ phases:
   pre_build:
      commands:
       - echo author Minhnx
-      - echo ===============  start pre-build  ======================
+      - echo ===============  start pre-build  ======================1
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 376129848715.dkr.ecr.us-east-1.amazonaws.com
       - echo ====================== end pre-build ======================
   build:
     commands:
-      - echo ====================== start build ======================
+      - echo ====================== start build ======================1
       - echo tag $CODEBUILD_BUILD_NUMBER
       - docker build -t project-3:$CODEBUILD_BUILD_NUMBER --file ./analytics/Dockerfile .
       - docker images
@@ -16,7 +16,7 @@ phases:
       - echo ====================== end build ======================
   post_build:
     commands:
-      - echo ====================== start post build ======================
+      - echo ====================== start post build ======================1
 
       - docker push 376129848715.dkr.ecr.us-east-1.amazonaws.com/project-3:$CODEBUILD_BUILD_NUMBER
       - echo ====================== end post build ======================
