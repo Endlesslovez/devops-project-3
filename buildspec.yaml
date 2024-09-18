@@ -8,7 +8,7 @@ phases:
       - echo ====================== end pre-build ======================
   build:
     commands:
-      - echo ====================== start build ======================1
+      - echo ====================== start build ======================2cbd
       - echo tag $CODEBUILD_BUILD_NUMBER
       - docker build -t project-3:$CODEBUILD_BUILD_NUMBER --file ./analytics/Dockerfile .
       - docker images
